@@ -66,6 +66,10 @@ struct kgsl_snapshot_section_header {
 #define KGSL_SNAPSHOT_OS_LINUX_V3          0x00000202
 
 /* Linux OS specific information */
+
+#define SNAPSHOT_STATE_HUNG 0
+#define SNAPSHOT_STATE_RUNNING 1
+
 struct kgsl_snapshot_linux {
 	int osid;                   /* subsection OS identifier */
 	int state;		    /* 1 if the thread is running, 0 for hung */
