@@ -39,6 +39,8 @@
 
 #include <linux/time.h>
 
+#include "dirtysanta_fixup.h"
+
 
 /* Added getting MSM chip version info, 2014-12-21, secheol.pyo@lge.com*/
 #define FEATURE_LGE_MODEM_LDB_EXCEPTION
@@ -534,6 +536,8 @@ static int pil_subsys_init(struct modem_data *drv,
 		goto err_ramdump;
 	}
 
+	dirtysanta_attach(&pdev->dev);
+
 	return 0;
 
 err_ramdump:
@@ -702,6 +706,8 @@ static int pil_mss_driver_probe(struct platform_device *pdev)
 static int pil_mss_driver_exit(struct platform_device *pdev)
 {
 	struct modem_data *drv = platform_get_drvdata(pdev);
+
+	dirtysanta_detach(&pdev->dev);
 
 	subsys_unregister(drv->subsys);
 	destroy_ramdump_device(drv->ramdump_dev);
