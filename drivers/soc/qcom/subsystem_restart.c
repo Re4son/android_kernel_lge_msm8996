@@ -1308,6 +1308,9 @@ static int subsys_device_open(struct inode *inode, struct file *file)
 	if (!subsys_dev)
 		return -EINVAL;
 
+/* trying to figure out timing */
+pr_info("DirtySanta: %s() called by pid %d for %s\n", __func__, current->pid,
+subsys_dev->desc->fw_name);
 	retval = subsystem_get_with_fwname(subsys_dev->desc->name,
 					subsys_dev->desc->fw_name);
 	if (IS_ERR(retval))

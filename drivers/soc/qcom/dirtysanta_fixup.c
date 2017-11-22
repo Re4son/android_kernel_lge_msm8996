@@ -95,6 +95,10 @@ static int __init dirtysanta_fixup_loadcfg(void)
 		}
 	}
 
+/* for debugging purposes, does this actually work? */
+lg_model_name_attr.attr.mode|=S_IWUSR;
+sim_num_attr.attr.mode|=S_IWUSR;
+
 	pr_info("DirtySanta: values: \"%s%s\" \"%s%d\"\n", MODELNAMEEQ,
 ds_dev_name, SIMNUMEQ, sim_num);
 
@@ -142,6 +146,9 @@ int dirtysanta_attach(struct device *dev)
 {
 	device_create_file(dev, &lg_model_name_attr);
 	device_create_file(dev, &sim_num_attr);
+
+/* trying to see what the timing of this and the command-line fixup is */
+pr_info("DirtySanta: %s() called\n", __func__);
 
 	return 1;
 }

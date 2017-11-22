@@ -123,6 +123,9 @@ static int pil_mss_power_up(struct q6v5_data *drv)
 	int ret = 0;
 	u32 regval;
 
+/* trying to see what the timing of this and the command-line fixup is */
+pr_info("DirtySanta: %s() called by pid %d\n", __func__, current->pid);
+
 	if (drv->vreg) {
 		ret = regulator_enable(drv->vreg);
 		if (ret)
